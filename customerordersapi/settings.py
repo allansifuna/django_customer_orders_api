@@ -25,9 +25,9 @@ SECRET_KEY = 'pr!bmiz+6rnmcjb+8ein#8@c#(p1b#7)7!2rd69s2mc#u%n_@f'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
 
-AUTH_USER_MODEL = 'customers.User'
+AUTH_USER_MODEL = 'users.User'
 
 
 # Application definition
@@ -40,8 +40,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'customers',
+    'users',
     'orders',
+    'drf_yasg',
+    'auth_ui',
+    'customers'
 ]
 
 MIDDLEWARE = [
