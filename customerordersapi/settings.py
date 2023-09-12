@@ -126,3 +126,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# Africa's talking
+AFRICASTALKING_USERNAME = 'sandbox'#os.environ.get('AFRICASTALKING_USERNAME')
+AFRICASTALKING_API_KEY = '2c512e3b538b84e8b9fcb5df6d36cc8ff357cba899d7b19474b2b247b5a87994'#os.environ.get('AFRICASTALKING_API_KEY')
