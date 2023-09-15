@@ -1,6 +1,8 @@
 from django.test import TestCase
+from users.models import User
 from rest_framework.test import APIClient
 from rest_framework import status
+from rest_framework.authtoken.models import Token
 from .models import Customer
 from .serializers import CustomersSerializer
 
@@ -8,9 +10,13 @@ from .serializers import CustomersSerializer
 class CustomerListAPIViewTest(TestCase):
     def setUp(self):
         self.client = APIClient()
+        self.user = User.objects.create(
+            username="test_user", password="test_password")
+        self.token, created = Token.objects.get_or_create(user=self.user)
 
     def test_list_customers(self):
-        response = self.client.get('/customers/')
+        self.client.force_authenticate(user=self.user)
+        response = self.client.get('/api/customers/')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_create_customer(self):
@@ -18,8 +24,8 @@ class CustomerListAPIViewTest(TestCase):
             "username": "Test Customer",
             "phone_number": "+25413812939"
         }
-
-        response = self.client.post('/customers/', data, format='json')
+        self.client.force_authenticate(user=self.user)
+        response = self.client.post('/api/customers/', data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
 
@@ -30,9 +36,13 @@ class CustomerDetailAPIViewTest(TestCase):
             username="Test Customer",
             phone_number="+25413812939"
         )
+        self.user = User.objects.create(
+            username="test_user", password="test_password")
+        self.token, created = Token.objects.get_or_create(user=self.user)
 
     def test_retrieve_customer(self):
-        response = self.client.get(f'/customers/{self.customer.id}')
+        self.client.force_authenticate(user=self.user)
+        response = self.client.get(f'/api/customers/{self.customer.id}')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_update_customer(self):
@@ -40,11 +50,12 @@ class CustomerDetailAPIViewTest(TestCase):
             "username": "Updated Customer",
             "phone_number": "+25413812939"
         }
-
+        self.client.force_authenticate(user=self.user)
         response = self.client.put(
-            f'/customers/{self.customer.id}', data, format='json')
+            f'/api/customers/{self.customer.id}', data, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_delete_customer(self):
-        response = self.client.delete(f'/customers/{self.customer.id}')
+        self.client.force_authenticate(user=self.user)
+        response = self.client.delete(f'/api/customers/{self.customer.id}')
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
