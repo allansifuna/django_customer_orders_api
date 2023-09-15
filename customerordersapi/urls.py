@@ -20,8 +20,9 @@ schema_view = get_schema_view(
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('orders/', include('orders.urls')),
-    path('customers/', include('customers.urls')),
+    path('api/orders/', include('orders.urls')),
+    path('api/customers/', include('customers.urls')),
+    path('api/google-oauth2/', include('google_openid_connect.urls')),
     path('login/', include('auth_ui.urls')),
     path('', schema_view.with_ui('swagger',
                                  cache_timeout=0), name='schema-swagger-ui'),

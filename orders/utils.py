@@ -1,7 +1,7 @@
 import threading
 
 
-class SMSThread(threading.Thread):
+class SMSThread(threading.Thread): # pragma: no cover
 
     def __init__(self, sms, message, customer_phone):
         self.sms = sms

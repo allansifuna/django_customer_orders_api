@@ -5,7 +5,6 @@ from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIV
 from rest_framework import permissions
 from .serializers import OrdersSerializer
 from .models import Order
-from .permissions import IsOwner
 from .utils import Util
 
 
@@ -20,6 +19,7 @@ sms = africastalking.SMS
 class OrderListAPIView(ListCreateAPIView):
     serializer_class = OrdersSerializer
     queryset = Order.objects.all()
+    permission_classes = (permissions.IsAuthenticated,)
 
     def perform_create(self, serializer):
         instance = serializer.save()
@@ -38,6 +38,7 @@ class OrderListAPIView(ListCreateAPIView):
 class OrderDetailAPIView(RetrieveUpdateDestroyAPIView):
     serializer_class = OrdersSerializer
     queryset = Order.objects.all()
+    permission_classes = (permissions.IsAuthenticated,)
     lookup_field = "id"
 
     def get_queryset(self):
