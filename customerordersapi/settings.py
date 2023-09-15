@@ -18,7 +18,7 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'pr!bmiz+6rnmcjb+8ein#8@c#(p1b#7)7!2rd69s2mc#u%n_@f'
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -150,8 +150,8 @@ STATIC_URL = '/static/'
 AFRICASTALKING_USERNAME = env('AFRICASTALKING_USERNAME')
 AFRICASTALKING_API_KEY = env('AFRICASTALKING_API_KEY')
 
-GOOGLE_OAUTH2_CLIENT_ID = env("GOOGLE_CLIENT_ID", default="")
-GOOGLE_OAUTH2_CLIENT_SECRET = env("GOOGLE_CLIENT_SECRET", default="")
-GOOGLE_OAUTH2_PROJECT_ID = env("GOOGLE_PROJECT_ID", default="")
+GOOGLE_OAUTH2_CLIENT_ID = env("GOOGLE_CLIENT_ID")
+GOOGLE_OAUTH2_CLIENT_SECRET = env("GOOGLE_CLIENT_SECRET")
+GOOGLE_OAUTH2_PROJECT_ID = env("GOOGLE_PROJECT_ID")
 
 BASE_BACKEND_URL = "http://localhost:8000"
