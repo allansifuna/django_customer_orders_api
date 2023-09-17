@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: customer-orders-api
-        image: allanns/customerordersapi:v0.0.3
+        image: allanns/customerordersapi:v0.0.4
         ports:
           - containerPort: 8000
         env:
