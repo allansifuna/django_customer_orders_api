@@ -4,3 +4,10 @@ __pycache__
 __pycache__/
 *.py[cod]
 .coverage
+*.tfvars
+.terraform
+*cluster-config.yaml
+*.hcl
+*.tfstate
+*.backup
+lke-cluster-kubeconfig.yaml

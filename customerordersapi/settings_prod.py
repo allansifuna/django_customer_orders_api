@@ -2,9 +2,10 @@ import environ
 from .settings import *
 
 env = environ.Env()
-
+# environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 DEBUG = False
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',

@@ -1,0 +1,75 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: customer-orders-api
+  name: customer-orders-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: customer-orders-api
+  template:
+    metadata:
+      labels:
+        app: customer-orders-api
+    spec:
+      containers:
+      - name: customer-orders-api
+        image: allanns/customerordersapi:v0.0.2
+        ports:
+          - containerPort: 8000
+        env:
+          - name: BASE_BACKEND_URL
+            value: http://customer-orders-api.default.svc.cluster.local:8000
+          - name: GOOGLE_CLIENT_ID
+            valueFrom:
+              secretKeyRef:
+                name: customer-orders-api-secrets
+                key: google_client_id
+          - name: GOOGLE_CLIENT_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: customer-orders-api-secrets
+                key: google_client_secret
+          - name: GOOGLE_PROJECT_ID
+            valueFrom:
+              secretKeyRef:
+                name: customer-orders-api-secrets
+                key: google_project_id
+          - name: SECRET_KEY
+            valueFrom:
+              secretKeyRef:
+                name: customer-orders-api-secrets
+                key: secret_key
+          - name: AFRICASTALKING_API_KEY
+            valueFrom:
+              secretKeyRef:
+                name: customer-orders-api-secrets
+                key: africastalking_api_key
+          - name: AFRICASTALKING_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: customer-orders-api-secrets
+                key: africastalking_username
+          - name: DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: customer-orders-api-secrets
+                key: db_password
+          - name: DB_USER
+            valueFrom:
+              secretKeyRef:
+                name: customer-orders-api-secrets
+                key: db_user
+          - name: DB_NAME
+            valueFrom:
+              secretKeyRef:
+                name: customer-orders-api-secrets
+                key: db_name
+          - name: DB_HOST
+            value: postgres-service.default.svc.cluster.local
+          - name: DJANGO_SETTINGS_MODULE
+            value: customerordersapi.settings_prod
+      restartPolicy: Always
+

@@ -20,7 +20,7 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", "https://accounts.google.com"]
+ALLOWED_HOSTS = [env("BASE_BACKEND_URL"), "https://accounts.google.com"]
 
 AUTH_USER_MODEL = 'users.User'
 
@@ -86,17 +86,6 @@ SWAGGER_SETTINGS = {
 WSGI_APPLICATION = 'customerordersapi.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/2.2/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-
-
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
 
@@ -152,4 +141,4 @@ GOOGLE_OAUTH2_CLIENT_ID = env("GOOGLE_CLIENT_ID")
 GOOGLE_OAUTH2_CLIENT_SECRET = env("GOOGLE_CLIENT_SECRET")
 GOOGLE_OAUTH2_PROJECT_ID = env("GOOGLE_PROJECT_ID")
 
-BASE_BACKEND_URL = "http://localhost:8000"
+BASE_BACKEND_URL = env("BASE_BACKEND_URL")
