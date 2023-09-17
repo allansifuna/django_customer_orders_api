@@ -6,7 +6,7 @@ metadata:
   name: customer-orders-api
 spec:
   ports:
-      - port: 8000
+      - port: 80
         targetPort: 8000
   type: LoadBalancer
   selector:
