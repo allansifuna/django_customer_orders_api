@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: customer-orders-api
-        image: allanns/customerordersapi:v0.0.2
+        image: allanns/customerordersapi:v0.0.3
         ports:
           - containerPort: 8000
         env:
@@ -69,6 +69,8 @@ spec:
                 key: db_name
           - name: DB_HOST
             value: postgres-service.default.svc.cluster.local
+          - name: DB_PORT
+            value: '5432'
           - name: DJANGO_SETTINGS_MODULE
             value: customerordersapi.settings_prod
       restartPolicy: Always
