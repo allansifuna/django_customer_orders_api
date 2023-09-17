@@ -16,12 +16,12 @@ spec:
     spec:
       containers:
       - name: customer-orders-api
-        image: allanns/customerordersapi:v0.0.4
+        image: allanns/customerordersapi:v0.0.6
         ports:
           - containerPort: 8000
         env:
           - name: BASE_BACKEND_URL
-            value: http://customer-orders-api.default.svc.cluster.local:8000
+            value: http://customerorders.mooo.com
           - name: GOOGLE_CLIENT_ID
             valueFrom:
               secretKeyRef:
